@@ -21,5 +21,6 @@ public class Product {
     private String group;
     private int layingScheme;
     private int quantityPerPallet;
+    private int quantity;
     private double weight;
 }
