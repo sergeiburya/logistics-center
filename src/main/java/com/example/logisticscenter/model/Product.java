@@ -1,11 +1,8 @@
 package com.example.logisticscenter.model;
 
 import lombok.Data;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+
+import javax.persistence.*;
 
 @Data
 @Entity
@@ -13,6 +10,7 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @Column(length = 7, unique = true)
     private String vendorCode;
     private String name;
     private String unit;
