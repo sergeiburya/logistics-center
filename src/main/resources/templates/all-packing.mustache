@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <link rel="stylesheet" href="/styles/style.css">
+        <title>All Packing</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    </head>
+    <header>
+
+    </header>
+    <body>
+        <div>
+            <h2>List of packaging types</h2>
+        </div>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Vendor Code</th>
+                <th>Name</th>
+                <th>Length</th>
+                <th>Width</th>
+                <th>Height</th>
+            </tr>
+        {{#packings}}
+            <div>
+                <tr>
+                    <td><b>{{id}}</b></td>
+                    <td><span>{{vendorCode}}</span></td>
+                    <td><span>{{name}}</span></td>
+                    <td><span>{{length}}</span></td>
+                    <td><span>{{width}}</span></td>
+                    <td><span>{{height}}</span></td>
+                </tr>
+            </div>
+        {{/packings}}
+        </table>
+    </body>
+    <footer>
+
+    </footer>
+</html>

@@ -1,13 +1,13 @@
 package com.example.logisticscenter.controller;
 
 import com.example.logisticscenter.model.Packing;
-import com.example.logisticscenter.repository.PackingRepository;
 import com.example.logisticscenter.service.PackingService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -18,22 +18,21 @@ public class PackingController {
         this.packingService = packingService;
     }
 
-    @GetMapping("/packing")
-    public String getAll(
-            @RequestParam (name="name",
-                    required = false,
-                    defaultValue = "List of packaging types.") String name,
-            Map<String, Object> model) {
-        model.put("name", name);
-     return "getAllpacking";
+    @GetMapping("/all-packing")
+    public String getAll(Map<String, Object> model) {
+        List<Packing> packingList = packingService.getAll();
+        model.put("packings", packingList);
+     return "all-packing";
     }
 
-    @PostMapping
-    public String addPacking(@RequestBody String vendorCode,
-                             @RequestBody String name,
-                             @RequestBody double length,
-                             @RequestBody double width,
-                             @RequestBody double height) {
+    @PostMapping ("/addPacking")
+    public String addPacking(
+            @RequestParam String vendorCode,
+            @RequestParam String name,
+            @RequestParam double length,
+            @RequestParam double width,
+            @RequestParam double height,
+            Map<String, Object> model) {
         Packing packing = new Packing();
         packing.setVendorCode(vendorCode);
         packing.setName(name);
@@ -41,6 +40,16 @@ public class PackingController {
         packing.setLength(length);
         packing.setWidth(width);
         packingService.save(packing);
+        List<Packing> packings = packingService.getAll();
+        model.put("name", packings);
+        return "addPacking";
+    }
+
+
+    @GetMapping("/addPacking")
+    public String addPacking(Map<String, Object> model) {
+        List<Packing> packings = packingService.getAll();
+        model.put("name", packings);
         return "addPacking";
     }
 }
